@@ -1,4 +1,34 @@
 ### GET request to example server
+GET http://localhost:8080/api/v1/software-engineers/2
+
+### GET request to example server
 GET http://localhost:8080/api/v1/software-engineers
 
 ###
+
+POST http://localhost:8080/api/v1/software-engineers
+Content-Type: application/json
+
+{
+  "name": "Dary",
+  "techStack": ["html/css","React.js"]
+}
+
+###
+POST http://localhost:8080/api/v1/software-engineers
+Content-Type: application/json
+
+{
+"name": "Casper",
+"techStack": ["html","React.js"]
+}
+
+###
+GET http://localhost:8080/api/v1/software-engineers/name/casper
+
+###
+GET http://localhost:8080/api/v1/software-engineers/techStack/html,
+    React.js
+
+###
+DELETE http://localhost:8080/api/v1/software-engineers/2
