@@ -18,30 +18,59 @@ public class SoftwareEngineerController {
         this.softwareEngineerRepository = softwareEngineerRepository;
     }
 
-
     @GetMapping
-    public List<SoftwareEngineer> getSoftwareEngineers() {
-        return softwareEngineerService.getAllSoftwareEngineers();
+    public ResponseEntity<?> getSoftwareEngineers() {
+        try {
+            return ResponseEntity.ok(softwareEngineerService.getAllSoftwareEngineers());
+        }
+        catch (NoSuchFieldException e) {
+            return ResponseEntity.notFound().build();
+        }
+        catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @GetMapping("{id}")
-    public SoftwareEngineer getSoftwareEngineerById(@PathVariable Integer id) {
-        return softwareEngineerService.getSoftwareEngineer(id);
+    public ResponseEntity<?> getSoftwareEngineerById(@PathVariable Integer id) {
+        try {
+            return ResponseEntity.ok(softwareEngineerService.getSoftwareEngineer(id));
+        }
+        catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @GetMapping("/name/{name}")
-    public SoftwareEngineer getSoftwareEngineerByName(@PathVariable String name) {
-        return softwareEngineerService.getSoftwareEngineerByName(name);
+    public ResponseEntity<?> getSoftwareEngineerByName(@PathVariable String name) {
+        try {
+            return ResponseEntity.ok(softwareEngineerService.getSoftwareEngineerByName(name));
+        }
+        catch (Exception e) {
+            return ResponseEntity.badRequest().body("A Error Occurred");
+        }
+
     }
 
     @GetMapping("/techStack/{techStack}")
-    public SoftwareEngineer getSoftwareEngineerByTechStack(@PathVariable String techStack) {
-        return softwareEngineerService.getSoftwareEngineerByTechStack(techStack);
+    public ResponseEntity<?> getSoftwareEngineerByTechStack(@PathVariable String techStack) {
+        try {
+            return ResponseEntity.ok(softwareEngineerService.getSoftwareEngineerByTechStack(techStack));
+        }
+        catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping
-    public void addSoftwareEngineer(@RequestBody SoftwareEngineer softwareEngineer) {
-        softwareEngineerService.insertSoftwareEngineer(softwareEngineer);
+    public ResponseEntity<?> addSoftwareEngineer(@RequestBody SoftwareEngineer softwareEngineer) {
+        try {
+            softwareEngineerService.insertSoftwareEngineer(softwareEngineer);
+            return new ResponseEntity<>(softwareEngineer, HttpStatus.CREATED);
+        }
+        catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     @DeleteMapping("{id}")

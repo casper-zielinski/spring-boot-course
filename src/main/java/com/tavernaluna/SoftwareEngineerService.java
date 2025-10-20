@@ -16,7 +16,10 @@ public class SoftwareEngineerService {
         this.softwareEngineerRepository = softwareEngineerRepository;
     }
 
-    public List<SoftwareEngineer> getAllSoftwareEngineers() {
+    public List<SoftwareEngineer> getAllSoftwareEngineers() throws NoSuchFieldException {
+        if (softwareEngineerRepository.findAll().isEmpty()) {
+            throw new NoSuchFieldException("No Software Engineer found");
+        }
         return softwareEngineerRepository.findAll();
     }
 

@@ -24,11 +24,21 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:8080/api/v1/software-engineers/name/casper
+POST http://localhost:8080/api/v1/software-engineers
+Content-Type: application/json
+
+{
+"name": "Joe",
+"techStack": ["ts","React.js","js/ts"]
+}
+
+
+###
+GET http://localhost:8080/api/v1/software-engineers/name/Casper
 
 ###
 GET http://localhost:8080/api/v1/software-engineers/techStack/html,
     React.js
 
 ###
-DELETE http://localhost:8080/api/v1/software-engineers/2
+DELETE http://localhost:8080/api/v1/software-engineers/3
