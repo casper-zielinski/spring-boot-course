@@ -11,23 +11,16 @@ import java.util.List;
 @RequestMapping("api/v1/software-engineers")
 public class SoftwareEngineerController {
 
+    private final SoftwareEnginnerService softwareEnginnerService;
+
+    public SoftwareEngineerController(SoftwareEnginnerService softwareEnginnerService) {
+        this.softwareEnginnerService = softwareEnginnerService;
+    }
+
 
     @GetMapping
     public List<SoftwareEngineer> getSoftwareEngineers() {
-        return List.of(
-                new SoftwareEngineer(
-                        1,
-                        "James",
-                        Collections.singletonList("js, node, react, tailwindcss")
-                ),
-                (
-                        new SoftwareEngineer(
-                                2,
-                                "Maddie",
-                                Collections.singletonList("js, java, react, bootstraps, springboot")
-                        )
-                        )
-        );
+        return softwareEnginnerService.getAllSoftwareEngineers();
     }
 
 }
